@@ -16,6 +16,13 @@ def view(file, output, filter):
     g = graph.jsonToGraph(j, echo=False, coFilter=filter)
     g.render('/tmp/output.svg', view=True)
 
+@cli.command(help='Print DOT formatted graph to stdout.')
+@click.argument('file', type=click.File('rb'), required=True)
+@click.option('-f', '--filter', multiple=True, default=[], help='Specify a filter for Cluster Operator names. This option can be specified multiple times.')
+def dot(file, filter):
+    j = json.load(file)
+    g = graph.jsonToGraph(j, echo=True, coFilter=filter)
+
 @cli.command('print', help='Print nicely formatted output to stdout.')
 @click.argument('file', type=click.File('rb'), required=True)
 @click.option('-f', '--filter', multiple=True, default=[], help='Specify a filter for Cluster Operator names. This option can be specified multiple times.')
@@ -24,18 +31,5 @@ def printOut(file, filter):
     g = graph.jsonToGraph(j, echo=True, coFilter=filter)
     # TODO: Pretty print :) 
 
-@cli.command(help='Print DOT formatted graph to stdout.')
-@click.argument('file', type=click.File('rb'), required=True)
-@click.option('-f', '--filter', multiple=True, default=[], help='Specify a filter for Cluster Operator names. This option can be specified multiple times.')
-def dot(file, filter):
-    j = json.load(file)
-    g = graph.jsonToGraph(j, echo=True, coFilter=filter)
-
-@cli.command(help='Print table formatted output to stdout.')
-@click.argument('file', type=click.File('rb'), required=True)
-@click.option('-f', '--filter', multiple=True, default=[], help='Specify a filter for Cluster Operator names. This option can be specified multiple times.')
-def table(file, filter):
-    pass
-
-if __name__=='__main__':
-    cli(obj={}) #noqa
+if __name__ == '__main__':
+    cli()

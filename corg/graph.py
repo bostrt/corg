@@ -2,6 +2,9 @@ from graphviz import Digraph
 from hashlib import md5
 
 def jsonToGraph(j, echo=True, coFilter=[]):
+    """
+    A quick and dirty function to convert JSON into a Digraph.
+    """
     g = Digraph(format='png')
     g.graph_attr['rankdir'] = 'LR'
     for clusteroperator in j.get('items'):
