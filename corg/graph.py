@@ -1,7 +1,7 @@
 from graphviz import Digraph
 from hashlib import md5
 
-def jsonToGraph(j, echo=True, coFilter=[]):
+def dictToGraph(j, echo=True, coFilter=[]):
     """
     A quick and dirty function to convert JSON into a Digraph.
     """
